@@ -7,6 +7,7 @@
 	<body>
 		<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5QgIBRYuuRw5TAAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAADElEQVQI12P4//8/AAX+Av7czFnnAAAAAElFTkSuQmCC" class="login_textbox" alt="captcha" id="captcha"/>
 		<script>
+			// VARIABLE THAT WILL CONTAIN THE CAPTCHA CODE
 			var captcha_code = null;
 
 			function createCaptcha(imageForCaptcha)
@@ -46,7 +47,7 @@
 						}
 					}
 
-				// SAVING THE GENERATED CAPTCHA
+				// SAVING THE GENERATED CAPTCHA CODE
 				captcha_code = captcha.join("");
 
 				// CREATING A CANVAS
