@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>JavaScript Captcha</title>
+		<meta charset="UTF-8"/>
+	</head>
+	<body>
+		<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5QgIBRYuuRw5TAAAAB1pVFh0Q29tbWVudAAAAAAAQ3JlYXRlZCB3aXRoIEdJTVBkLmUHAAAADElEQVQI12P4//8/AAX+Av7czFnnAAAAAElFTkSuQmCC" class="login_textbox" alt="captcha" id="captcha"/>
+		<script>
+			var captcha_code = null;
+
+			function createCaptcha(imageForCaptcha)
+				{
+				// FUNCTION TO GET A RANDOM COLOR FOR EACH CHARACTER
+				function randomColor()
+					{
+					var r = Math.floor(Math.random()*256);
+					var g = Math.floor(Math.random()*256);
+					var b = Math.floor(Math.random()*256);
+					return "rgb(" + r + "," + g + "," + b + ")";
+					}
+
+				// SETTING ALL THE AVAILABLE CHARACTERS FOR THE CAPTCHA
+				var charsArray = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+				// SETTING HOW MANY CHARACTERS WILL THE CAPTCHA IS GOING TO HAVE
+				var lengthOtp = 6;
+
+				// SETTING A VARIABLE THAT WILL CONTAINS ALL THE CAPTCHA CHARACTERS
+				var captcha = [];
+
+				// LOOPING UNTIL THE CAPTCHA IS FULLY GENERATED
+				while (captcha.length<lengthOtp)
+					{
+					// GETTING A RANDOM INDEX
+					var index = Math.floor(Math.random() * charsArray.length);
+
+					// GETTING A RANDOM CHARACTER
+					var randomCharacter = charsArray[index];
+
+					// CHECKING IF THE RANDOM CHARACTER IS NOT ALREADY IN THE CAPTCHA
+					if (captcha.indexOf(randomCharacter) == -1)
+						{
+						// ADDING THE RANDOM CHARACTER
+						captcha.push(randomCharacter);
+						}
+					}
+
+				// SAVING THE GENERATED CAPTCHA
+				captcha_code = captcha.join("");
+
+				// CREATING A CANVAS
+				var canvas = document.createElement("canvas");
+				canvas.width = 200;
+				canvas.height = 34;
+
+				// GETTING THE CANVAS CONTEXT
+				var context = canvas.getContext("2d");
+
+				// SETING THE FONT NAME AND SIZE
+				context.font = "26px Arial";
+
+				// LOOPING EVERY CHARACTER FROM THE CAPTCHA
+				for (var i = 0; i < captcha.length; i++)
+					{
+					// GETTING A RANDOM ANGLE
+					var randomAngle = Math.floor(Math.random() * 60);
+					var rad = randomAngle * Math.PI / 180;
+
+					// SETTING THE X AND Y POSITIONS
+					var valueX = (i * 26) + 19;
+					var valueY = 23;
+
+					// CHECKING A 50% POSSIBILITY TO ROTATE THE CHARACTER COUNTERCLOCKWISE
+					if(Math.floor(Math.random() * 10)<=5)
+						{
+						// ROTATING THE CHARACTER COUNTERCLOCKWISE
+						rad = -rad;
+
+						// UPDATING THE CHARACTER Y POSITION
+						valueY = valueY + 5;
+						}
+
+					// SETTING THE CHARACTER ROTATION
+					context.translate(valueX, valueY);
+					context.rotate(rad);
+
+					// SETTING A RANDOM COLOR FOR THE CHARACTER
+					context.fillStyle = randomColor();
+
+					// DRAWING THE CHARACTER
+					context.fillText(captcha[i], 0 , 0);
+
+					// RESTORING THE CANVAS ROTATION
+					context.rotate(-rad);
+					context.translate(-valueX, -valueY);
+					}
+
+				// DRAWING LINES OVER THE CHARACTERS
+				for (var i = 0; i <= 5; i++)
+					{
+					context.strokeStyle = randomColor();
+					context.beginPath();
+					context.moveTo(Math.random() * canvas.width, Math.random() * canvas.height);
+					context.lineTo(Math.random() * canvas.width, Math.random() * canvas.height);
+					context.stroke();
+					}
+
+				// DRAWING DOTS OVER THE CHARACTERS
+				for (var i = 0; i < 30; i++)
+					{
+					context.strokeStyle = randomColor();
+					context.beginPath();
+					var tempX = Math.random() * canvas.width;
+					var tempY = Math.random() * canvas.height;
+					context.moveTo(tempX, tempY);
+					context.lineTo(tempX + 1, tempY + 1);
+					context.stroke();
+					}
+
+				// EXPORTING THE CANVAS AS AN IMAGE
+				imageForCaptcha.src = canvas.toDataURL("data/png");
+				}
+
+		// CREATING A CAPTCHA
+		createCaptcha(document.getElementById("captcha"));
+
+		</script>
+	</body>
+</html>
