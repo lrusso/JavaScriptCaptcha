@@ -2,7 +2,7 @@
 
 Captcha in JavaScript.
 
-## Web:
+## Vanilla JavaScript version:
 
 https://lrusso.github.io/JavaScriptCaptcha/JavaScriptCaptcha.htm
 
