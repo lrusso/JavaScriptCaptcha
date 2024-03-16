@@ -8,4 +8,4 @@ https://lrusso.github.io/JavaScriptCaptcha/JavaScriptCaptcha.htm
 
 ## React version:
 
-https://github.com/lrusso/JavaScriptCaptcha/blob/main/LoginCaptcha.js
+https://github.com/lrusso/JavaScriptCaptcha/blob/main/react/LoginCaptcha.js
