@@ -151,7 +151,7 @@ const LoginCaptcha = ({ height, setCaptchaCode, reloadCaptchaOnUpdate }) => {
     }
 
     // RETURNING AN OBJECT WITH THE CAPTCHA IMAGE AND CODE
-    return { captchaImage: canvas.toDataURL("data/png"), captchaCode: captchaCode }
+    return { captchaImage: canvas.toDataURL("image/png"), captchaCode: captchaCode }
   }
 
   const newCaptcha = () => {
